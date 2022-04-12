@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.EditText;
 /*
-SharedPreferences는
+SharedPreferences는 (설정에서 자주사용 ex)
 데이터를 파일로 저장함
 파일은 앱데이터 내에 저장되기에 앱이 삭제되면 데이터도 삭제됨
 클래스로 만들어서 사용하기 좋음
