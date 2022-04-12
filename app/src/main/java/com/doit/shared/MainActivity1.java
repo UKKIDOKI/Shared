@@ -1,10 +1,11 @@
 package com.doit.shared;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 /*
 SharedPreferences는
 데이터를 파일로 저장함
@@ -13,10 +14,10 @@ SharedPreferences는
 
 저장된 파일의 위치는 data/data/(package_name)/shared_prefs/SharedPreference
 출처 https://re-build.tistory.com/37 참고하기
-아래는 MainActivity의 있는 SharedPreferences를 클래스화 하여 작성한 코드
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity1 extends AppCompatActivity {
     EditText et_save;    // 사용할 변수선언
+    String shared = "file"; //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
         et_save = findViewById(R.id.et_save);
 
-
-        String value = PreferenceManager.getString(this,"rebuild");
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, 0); //
+        String value = sharedPreferences.getString("key","");
         et_save.setText(value); // EditText에 받아온값 저장
 
 
@@ -38,8 +39,11 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
 
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit(); // 저장할때 필수
         String value = et_save.getText().toString(); // EditText에 입력된 데이터를 문자열형태로 가져와 문자열 변수에 저장
-        PreferenceManager.setString(this,"rebuild",value);
+        editor.putString("key", value); // 에디터안에 문자열 데이터 저장  키값과, 벨류
+        editor.commit();  // 저장
     }
 
 }
